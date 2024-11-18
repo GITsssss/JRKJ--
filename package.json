@@ -1,0 +1,21 @@
+{
+  "author": "Unity",
+  "dependencies": {
+    "com.unity.textmeshpro": "3.0.6"
+  },
+  "description": "UnityVR",
+  "displayName": "AndroidReceiver",
+  "documentationUrl": "https://spatiallabs.acer.com/developer",
+  "keywords": [
+    "AndroidReceiver",
+    "Android"
+  ],
+  "license": "NONE",
+  "name": "com.jrkj.androidreceiver",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/3d-group/unity-package-template.git"
+  },
+  "version": "1.0.0",
+  "unity": "2020.3"
+}
