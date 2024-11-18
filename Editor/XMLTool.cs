@@ -69,7 +69,7 @@ namespace HLVR.AndroidReceiver
                     }
                     using (StreamWriter writer = new StreamWriter(folder + "/UnityReceiver.java", false))
                     {
-                        writer.WriteLine("package  com.JRKJ.quest3App;\r\n\r\nimport android.content.BroadcastReceiver;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.util.Log;\r\n\r\nimport com.unity3d.player.UnityPlayer;\r\n\r\npublic class UnityReceiver extends BroadcastReceiver {\r\n    @Override\r\n    public void onReceive(Context context, Intent intent) {\r\n        String message = intent.getStringExtra(\"message\");\r\n        if (\"CallUnityMethod\".equals(message)) {\r\n            Log.d(\"UnityReceiver\", \"Message received: \" + message);\r\n            UnityPlayer.UnitySendMessage(\"ReceiverPort\", \"Receiver\", message);\r\n        }\r\n    }\r\n}\r\n");
+                        writer.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\" \r\n          xmlns:tools=\"http://schemas.android.com/tools\" \r\n          package=\"com.JRKJ.quest3App\">\r\n  <application android:allowBackup=\"true\"\r\n               android:label=\"@string/app_name\" \r\n               android:supportsRtl=\"true\">\r\n    <activity android:name=\"com.unity3d.player.UnityPlayerActivity\" \r\n              android:theme=\"@style/UnityThemeSelector\">\r\n      <intent-filter>\r\n        <action android:name=\"android.intent.action.MAIN\" />\r\n        <category android:name=\"android.intent.category.LAUNCHER\" />\r\n      </intent-filter>\r\n      <meta-data android:name=\"unityplayer.UnityActivity\" \r\n                 android:value=\"true\" />\r\n    </activity>\r\n    <!-- 添加 BroadcastReceiver -->\r\n    <receiver android:name=\"com.JRKJ.quest3App.UnityReceiver\" \r\n              android:exported=\"true\">\r\n      <!-- 修改这里 -->\r\n       <intent-filter>\r\n         <action android:name=\"com.example.UNITY_ACTION\" />\r\n      </intent-filter>\r\n    </receiver>\r\n  </application>\r\n</manifest>");
                     }
                     AssetDatabase.Refresh();
                 }
@@ -80,7 +80,7 @@ namespace HLVR.AndroidReceiver
                 {
                     using (StreamWriter writer = new StreamWriter(folder + "/AndroidManifest.xml", false))
                     {
-                        writer.WriteLine("<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n          xmlns:tools=\"http://schemas.android.com/tools\"\r\n          package=\"com.JRKJ.quest3App\">\r\n\r\n  <application\r\n      android:allowBackup=\"true\"\r\n      android:label=\"@string/app_name\"\r\n      android:supportsRtl=\"true\">\r\n\r\n    <activity\r\n        android:name=\"com.unity3d.player.UnityPlayerActivity\"\r\n        android:theme=\"@style/UnityThemeSelector\">\r\n      <intent-filter>\r\n        <action android:name=\"android.intent.action.MAIN\" />\r\n        <category android:name=\"android.intent.category.LAUNCHER\" />\r\n      </intent-filter>\r\n      <meta-data\r\n          android:name=\"unityplayer.UnityActivity\"\r\n          android:value=\"true\" />\r\n    </activity>\r\n\r\n    <!-- 添加 BroadcastReceiver -->\r\n    <receiver\r\n        android:name=\"com.JRKJ.quest3App.UnityReceiver\"\r\n        android:exported=\"true\">\r\n      <!-- 修改这里 -->\r\n      <intent-filter>\r\n        <action android:name=\"com.example.UNITY_ACTION\" />\r\n      </intent-filter>\r\n    </receiver>\r\n\r\n  </application>\r\n</manifest>");
+                        writer.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\" \r\n          xmlns:tools=\"http://schemas.android.com/tools\" \r\n          package=\"com.JRKJ.quest3App\">\r\n  <application android:allowBackup=\"true\"\r\n               android:label=\"@string/app_name\" \r\n               android:supportsRtl=\"true\">\r\n    <activity android:name=\"com.unity3d.player.UnityPlayerActivity\" \r\n              android:theme=\"@style/UnityThemeSelector\">\r\n      <intent-filter>\r\n        <action android:name=\"android.intent.action.MAIN\" />\r\n        <category android:name=\"android.intent.category.LAUNCHER\" />\r\n      </intent-filter>\r\n      <meta-data android:name=\"unityplayer.UnityActivity\" \r\n                 android:value=\"true\" />\r\n    </activity>\r\n    <!-- 添加 BroadcastReceiver -->\r\n    <receiver android:name=\"com.JRKJ.quest3App.UnityReceiver\" \r\n              android:exported=\"true\">\r\n      <!-- 修改这里 -->\r\n       <intent-filter>\r\n         <action android:name=\"com.example.UNITY_ACTION\" />\r\n      </intent-filter>\r\n    </receiver>\r\n  </application>\r\n</manifest>");
                     }
                     AssetDatabase.Refresh();
                 }
@@ -91,7 +91,7 @@ namespace HLVR.AndroidReceiver
                 {
                     using (StreamWriter writer = new StreamWriter(folder + "/UnityReceiver.java", false))
                     {
-                        writer.WriteLine("package  com.JRKJ.quest3App;\r\n\r\nimport android.content.BroadcastReceiver;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.util.Log;\r\n\r\nimport com.unity3d.player.UnityPlayer;\r\n\r\npublic class UnityReceiver extends BroadcastReceiver {\r\n    @Override\r\n    public void onReceive(Context context, Intent intent) {\r\n        String message = intent.getStringExtra(\"message\");\r\n        if (\"CallUnityMethod\".equals(message)) {\r\n            Log.d(\"UnityReceiver\", \"Message received: \" + message);\r\n            UnityPlayer.UnitySendMessage(\"ReceiverPort\", \"Receiver\", message);\r\n        }\r\n    }\r\n}\r\n");
+                        writer.WriteLine("package  com.JRKJ.quest3App;\r\n\r\nimport android.content.BroadcastReceiver;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.util.Log;\r\n\r\nimport com.unity3d.player.UnityPlayer;\r\n\r\npublic class UnityReceiver extends BroadcastReceiver {\r\n\r\n    @Override\r\n    public void onReceive(Context context, Intent intent) \r\n    {\r\n       \r\n        String message = intent.getStringExtra(\"message\");\r\n        // ReceiverPort：物体名称   Receiver:方法名   message 接收的信息\r\n        if(message!=null)\r\n        {         \r\n            UnityPlayer.UnitySendMessage(\"ReceiverPort\", \"Receiver\", message);        \r\n        }\r\n \r\n    }\r\n\r\n    public void UnitySendMessageOtherApp(String content) {\r\n        \r\n        Context context = UnityPlayer.currentActivity;\r\n       \r\n        Intent intent = new Intent(\"com.unity.UNITY_ACTION\");\r\n     \r\n        intent.setPackage(\"com.quest3.backgroundservicequest3\"); \r\n\r\n        intent.putExtra(\"message\", content);\r\n      \r\n        context.sendBroadcast(intent);\r\n\r\n    }\r\n}\r\n\r\n");
                     }
                     AssetDatabase.Refresh();
                 }
@@ -124,11 +124,11 @@ namespace HLVR.AndroidReceiver
                         {
                             SetXML();
                             SetJava_UnityReceiver();
-                            //ReceiverPort[] receiverPorts=FindObjectsOfType<ReceiverPort>(true);
-                            //foreach (ReceiverPort receiverPort in receiverPorts) 
-                            //{
-                            //    receiverPort.PackName = Application.identifier;
-                            //}
+                            ReceiverPort[] receiverPorts = FindObjectsOfType<ReceiverPort>(true);
+                            foreach (ReceiverPort receiverPort in receiverPorts)
+                            {
+                                receiverPort.packName = Application.identifier;
+                            }
                             isfinish = true;
                         }
                     }

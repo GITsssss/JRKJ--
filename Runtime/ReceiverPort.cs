@@ -12,6 +12,7 @@ namespace HLVR.AndroidReceiver
         //[SerializeField]   
         public string packName;
         //调试用的文本，可以为空！
+        [Tooltip("Can be empty")]
         public TMP_Text debugInfo;
         public Receiver[] receivers;
 
@@ -33,6 +34,7 @@ namespace HLVR.AndroidReceiver
         void Reset()
         {
             this.gameObject.name = GetType().Name;
+            packName= Application.identifier;
         }
         void Start()
         {

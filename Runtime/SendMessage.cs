@@ -4,15 +4,26 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine.Events;
 using System.IO;
+using UnityEditor;
+using System;
 
 namespace HLVR.AndroidReceiver 
 {
+    [Icon("Profiler.NetworkMessages")]
     public class SendMessage : MonoBehaviour
     {
         // public TMP_Text log;
+        
         public float time = 3;
-        public bool onEnableSendMessage = true;
+        public bool  onEnableSendMessage = true;
+        public string heartbeat="Unity连接监听中...";
+        private  string splitChar="&";
 
+        public List<Send> sends= new List<Send>();
+        public string SplitChar 
+        {
+            get { return splitChar; }
+        }
         private void Start()
         {
             if (onEnableSendMessage)
@@ -20,11 +31,51 @@ namespace HLVR.AndroidReceiver
                 StartCoroutine(SendMessageCoroutine());
             }
         }
+
+        /// <summary>
+        /// 发送消息给后台服务 例：key:学号、姓名、分数；content：11 、小明、99
+        /// </summary>
+        /// <param name="key">关键词</param>
+        /// <param name="content">发送内容</param>
+        public void SendMessageBackService(string key,string content)
+        {
+            string info = key + splitChar + content;
+            SendBroadcast(info);
+        }
+
+        /// <summary>
+        /// 发送消息给后台服务
+        /// </summary>
+        /// <param name="index">sends消息列表的索引号</param>
+        public void SendMessageBackService(int index)
+        {
+
+            SendBroadcast(sends[index].Message(splitChar));
+        }
+
+
+        /// <summary>
+        /// 发送消息给后台服务
+        /// </summary>
+        /// <param name="key">键</param>
+        public void SendMessageBackService(string key)
+        {
+            foreach (var item in sends)
+            {
+                if (item.key.Contains(key))
+                {
+                    SendBroadcast(item.Message(splitChar));
+                    return;
+                }
+            }       
+        }
+
+
         IEnumerator SendMessageCoroutine()
         {
             while (true)
             {
-                SendBroadcast("Unity 发送消息");
+                SendBroadcast(heartbeat);
                 yield return new WaitForSeconds(time);
             }
         }
@@ -79,4 +130,16 @@ namespace HLVR.AndroidReceiver
         }
     }
 
+
+    [System.Serializable]
+    public struct Send 
+    {
+        public string key;
+        public string value;
+
+        public string Message(string splitchar)
+        {
+            return key + splitchar + value;
+        }
+    }
 }
