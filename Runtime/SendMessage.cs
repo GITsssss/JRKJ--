@@ -27,6 +27,7 @@ namespace HLVR.AndroidReceiver
             {
                 StartCoroutine(SendMessageCoroutine());
             }
+            SendMessageBackServiceCustomKeyContent("ShowStopButton", "000");
         }
 
         /// <summary>
