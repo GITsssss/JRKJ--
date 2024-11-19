@@ -1,14 +1,14 @@
 {
-    "name": "Editor",
+    "name": "editor",
     "rootNamespace": "",
     "references": [
-        "GUID:6546d7765b4165b40850b3667f981c26",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
         "GUID:4b2dd7e32a96bc34b946c492167767c9"
     ],
-    "includePlatforms": [],
-    "excludePlatforms": [
+    "includePlatforms": [
         "Editor"
     ],
+    "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],

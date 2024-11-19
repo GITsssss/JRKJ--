@@ -1,11 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
-using UnityEngine.Events;
 using System.IO;
-using UnityEditor;
-using System;
+
 
 namespace HLVR.AndroidReceiver 
 {
@@ -37,7 +34,7 @@ namespace HLVR.AndroidReceiver
         /// </summary>
         /// <param name="key">关键词</param>
         /// <param name="content">发送内容</param>
-        public void SendMessageBackService(string key,string content)
+        public void SendMessageBackServiceCustomKeyContent(string key,string content)
         {
             string info = key + splitChar + content;
             SendBroadcast(info);
@@ -47,7 +44,7 @@ namespace HLVR.AndroidReceiver
         /// 发送消息给后台服务
         /// </summary>
         /// <param name="index">sends消息列表的索引号</param>
-        public void SendMessageBackService(int index)
+        public void SendMessageBackServiceByIndex(int index)
         {
 
             SendBroadcast(sends[index].Message(splitChar));
@@ -58,7 +55,7 @@ namespace HLVR.AndroidReceiver
         /// 发送消息给后台服务
         /// </summary>
         /// <param name="key">键</param>
-        public void SendMessageBackService(string key)
+        public void SendMessageBackServiceByKey(string key)
         {
             foreach (var item in sends)
             {
@@ -80,7 +77,7 @@ namespace HLVR.AndroidReceiver
             }
         }
 
-        public void SendBroadcast(string message)
+        private void SendBroadcast(string message)
         {
             if (Application.platform == RuntimePlatform.Android)
             {
