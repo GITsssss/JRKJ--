@@ -2,8 +2,7 @@
 using UnityEditor;
 using System.Xml;
 using System.IO;
-
-
+using System.Linq;
 
 namespace HLVR.AndroidReceiver 
 {
@@ -18,31 +17,66 @@ namespace HLVR.AndroidReceiver
         string str;
         bool isfinish;
         SerializedObject serializedObject;
+       
+        private static void Creat() 
+        {
+
+             ReceiverPort  receiverPort = FindObjectOfType<ReceiverPort>();
+
+            if (receiverPort != null)
+            {
+                SendMessage sendMessage = FindObjectOfType<SendMessage>();
+
+                if (sendMessage != null)
+                {
+                    if (sendMessage.gameObject != receiverPort.gameObject)
+                    {
+                        DestroyImmediate(sendMessage);
+                        receiverPort.gameObject.AddComponent<SendMessage>();
+                    }
+                    else 
+                    {
+                        Tips.Open();
+                    }
+                }
+                else
+                {
+                    receiverPort.gameObject.AddComponent<SendMessage>();
+                }
+
+                EditorUtility.SetDirty(receiverPort.gameObject);
+            }
+            else 
+            {
+                SendMessage sendMessage = FindObjectOfType<SendMessage>();
+                if (sendMessage != null) 
+                {
+                    sendMessage.gameObject.AddComponent<ReceiverPort>();
+                }
+                else
+                {
+                    sendMessage = new GameObject().AddComponent<SendMessage>();
+                    sendMessage.gameObject.AddComponent<ReceiverPort>();        
+                }
+                EditorUtility.SetDirty(sendMessage.gameObject);
+            }       
+        } 
+
 
         [MenuItem("HLVR/Tool/Add ReceiverPort")]
         public static void AddReceiverPort()
         {
-            GameObject g = new GameObject();
-            g.AddComponent<ReceiverPort>();
-            g.AddComponent<SendMessage>();
-            EditorUtility.SetDirty(g);
+            Creat();
         }
         [MenuItem("GameObject/3D Object/ReceiverPort", false, 0)]
         public static void AddReceiverPort2()
         {
-            GameObject g = new GameObject();
-            g.AddComponent<ReceiverPort>();
-            g.AddComponent<SendMessage>();
-            EditorUtility.SetDirty(g);
+            Creat();
         }
         [MenuItem("GameObject/Add ReceiverPort", false, 0)]
         public static void AddReceiverPort3()
         {
-            GameObject g = new GameObject();
-            g.AddComponent<ReceiverPort>();
-            g.AddComponent<SendMessage>();
-            EditorUtility.SetDirty(g);
-
+            Creat();
         }
         private void OnEnable()
         {
